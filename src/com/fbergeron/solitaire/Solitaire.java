@@ -62,7 +62,7 @@ public class Solitaire extends Frame
     public static final Point SEQ_STACK_POS         = new Point( REVEALED_CARDS_POS.x + ClassicCard.DEFAULT_WIDTH + 92, DECK_POS.y );
     public static final Point SOL_STACK_POS         = new Point( DECK_POS.x, SEQ_STACK_POS.y + ClassicCard.DEFAULT_HEIGHT + 5 );
 
-    public static final Color TABLE_COLOR           = new Color(173,216,230);
+    public static final Color TABLE_COLOR           = new Color(7, 103, 45);
     
     public static long timestart = System.currentTimeMillis();
     public static int counter = 0;
@@ -203,7 +203,7 @@ public class Solitaire extends Frame
         dica.addActionListener(new hintOuvidor());
         dica.setBackground(new Color (135,206,250));
         dica.setFocusable(false);
-        add(dica);
+        //add(dica);
         
         desfazer = new Button("Undo");
         desfazer.setBounds(220, 500, 50, 50);
@@ -211,7 +211,7 @@ public class Solitaire extends Frame
         desfazer.setBackground(new Color (135,206,250));
         desfazer.setFocusable(false);
         desfazer.setEnabled(false);
-        add(desfazer);
+        //add(desfazer);
         
         
         //Table
@@ -740,15 +740,15 @@ public class Solitaire extends Frame
                 int y = 485;
                 
                 offscreenGr.setColor( Color.lightGray ); // Shadow
-                offscreenGr.drawString( gameInfoStr, x + 1, y + 1 );
+                //offscreenGr.drawString( gameInfoStr, x + 1, y + 1 );
                 offscreenGr.setColor( Color.black ); // Text
-                offscreenGr.drawString( gameInfoStr, x, y );
+                //offscreenGr.drawString( gameInfoStr, x, y );
                 
                 //movimentos
                 offscreenGr.setColor( Color.lightGray ); // Shadow
-                offscreenGr.drawString("Moves: " + counter, x + 1, y + 1 - 20 );
+                //offscreenGr.drawString("Moves: " + counter, x + 1, y + 1 - 20 );
                 offscreenGr.setColor( Color.black ); // Text
-                offscreenGr.drawString("Moves: " + counter, x, y - 20 );
+               // offscreenGr.drawString("Moves: " + counter, x, y - 20 );
                 
                 //tempo atualizado
                 long agr = (System.currentTimeMillis() - timestart)/1000;
@@ -771,9 +771,9 @@ public class Solitaire extends Frame
                 }
                            
                 offscreenGr.setColor( Color.lightGray ); // Shadow
-                offscreenGr.drawString(agora , x + 1, y + 1 - 40 );
+                //offscreenGr.drawString(agora , x + 1, y + 1 - 40 );
                 offscreenGr.setColor( Color.black ); // Text
-                offscreenGr.drawString(agora , x, y - 40 );
+                //offscreenGr.drawString(agora , x, y - 40 );
                 
                 if(!isGameWon()) {
                 	table.repaint(6);

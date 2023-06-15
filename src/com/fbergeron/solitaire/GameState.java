@@ -152,7 +152,15 @@ public class GameState {
         curr = currStack;   
         if( curr != null )
             curr.reverse();
-        for (int j2 = 0; j2 < Solitaire.SOL_STACK_CNT; j2++) {
+        teste(i, curr, src);
+        // put cards back on src stack
+        for( ; !curr.isEmpty(); )
+            src.push( curr.pop() );
+    }
+
+	private void teste(int i, Stack curr, Stack src) {
+		Stack dst;
+		for (int j2 = 0; j2 < Solitaire.SOL_STACK_CNT; j2++) {
             if (j2!=i){
                 dst = this.solStack[ j2 ];
                 if( dst != null && dst.isValid( curr ) ) { 
@@ -174,10 +182,7 @@ public class GameState {
                 }
             }
         }
-        // put cards back on src stack
-        for( ; !curr.isEmpty(); )
-            src.push( curr.pop() );
-    }
+	}
 
     // Check if card can be moved to a sequential stack
     private void legalSolToSeq(ArrayList<GameState> legalGs, ClassicCard c, int i) {

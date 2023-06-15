@@ -135,8 +135,16 @@ public class ClassicCard extends Card {
         g.setClip(border); // Don't draw outside the lines
 
         if( isFaceDown() ) {
-            g.setColor( CARD_COLOR );
-            g.fillRect( location.x, location.y, getSize().width - 1, getSize().height - 1 );
+        	g.setColor(CARD_COLOR);
+            g.fillRect(location.x, location.y, getSize().width, getSize().height);
+
+            // Desenhar uma borda branca ao redor do verso da carta
+            g.setColor(Color.white);
+            int borderWidth = 10; // Largura da borda branca
+            g.fillRect(location.x, location.y, getSize().width, borderWidth); // Borda superior
+            g.fillRect(location.x, location.y, borderWidth, getSize().height); // Borda esquerda
+            g.fillRect(location.x, location.y + getSize().height - borderWidth, getSize().width, borderWidth); // Borda inferior
+            g.fillRect(location.x + getSize().width - borderWidth, location.y, borderWidth, getSize().height); // Borda direita
         }
         else {
             g.setColor( Color.white );
