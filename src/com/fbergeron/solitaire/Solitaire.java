@@ -133,6 +133,7 @@ public class Solitaire extends Frame
         //Menu Options
         menuOptions = new Menu( "Options" );
         menubar.add( menuOptions );
+        
         menuItemNewGame = new MenuItem( "NewGame");
         menuItemNewGame.addActionListener( new NewGameListener() );
         menuItemNewGame.setShortcut( new MenuShortcut( KeyEvent.VK_N, false ) );
@@ -194,7 +195,14 @@ public class Solitaire extends Frame
         menuItemFrench.addItemListener( new LocaleListener( Locale.FRENCH ) );
         menuHelp.add( menuItemEnglish );
         menuHelp.add( menuItemFrench );
-
+        
+        menuDesenvolvimento = new Menu( "Em desenvolvimento" );
+        menubar.add( menuDesenvolvimento );
+        
+        menuRanking =  new MenuItem("Ranking");
+        menuRanking.addActionListener(new RankingListener());
+        
+        menuDesenvolvimento.add( menuRanking );
         //String backgroundImageName = "test";
         //backgroundImage = Util.getImageResourceFile(backgroundImageName + ".png", Solitaire.class );
 
@@ -545,6 +553,16 @@ public class Solitaire extends Frame
             frameRules.setVisible( true );
         }
     }
+    
+    class RankingListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if( frameRanking == null )
+            	frameRanking = new SolitaireRanking();
+            frameRanking.setLocale( Solitaire.this.getLocale() );
+            frameRanking.setVisible( true );
+        }
+    }
+    
 
     class MouseManager extends MouseAdapter implements MouseMotionListener {
     	public void mouseMoved(MouseEvent e) {
@@ -1273,6 +1291,8 @@ public class Solitaire extends Frame
     private Button				desfazer;
     private MenuBar             menubar;
     private Menu                menuOptions;
+    private Menu                menuDesenvolvimento;
+    private MenuItem            menuRanking;
     private Menu                menuHelp;
     private MenuItem            menuItemNewGame;
     private MenuItem            menuItemRestart;
@@ -1291,5 +1311,6 @@ public class Solitaire extends Frame
 
     private FrameAbout          frameAbout;
     private FrameRules          frameRules;
+    private SolitaireRanking    frameRanking;    
 }
 
