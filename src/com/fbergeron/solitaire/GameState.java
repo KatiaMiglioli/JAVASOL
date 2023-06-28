@@ -202,7 +202,14 @@ public class GameState {
                 src.push( curr.pop() );
             return;
         }
-        for (int j2 = 0; j2 < Solitaire.SEQ_STACK_CNT; j2++) {
+        validarMovimentoCard(curr, src);
+        for( ; !curr.isEmpty(); )
+            src.push( curr.pop() );
+    }
+
+	private void validarMovimentoCard(Stack curr, Stack src) {
+		Stack dst;
+		for (int j2 = 0; j2 < Solitaire.SEQ_STACK_CNT; j2++) {
             dst = this.seqStack[ j2 ];
             if( dst != null && dst.isValid( curr ) ) { 
                 // Move is legal so apply move and store result gamestate in legal games states
@@ -218,10 +225,7 @@ public class GameState {
                 return;
             }
         }
-        // put cards back on src stack
-        for( ; !curr.isEmpty(); )
-            src.push( curr.pop() );
-    }
+	}
 
     // Check if revealed card can be place on one of the solitaire stacks
     private void legalRevToSol(ArrayList<GameState> legalGs, ClassicCard c) {

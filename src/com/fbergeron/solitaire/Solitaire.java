@@ -202,7 +202,11 @@ public class Solitaire extends Frame
         menuRanking =  new MenuItem("Ranking");
         menuRanking.addActionListener(new RankingListener());
         
+        menuPrototipo =  new MenuItem("Menu Inicial");
+        menuPrototipo.addActionListener( new MenuPListener());
+        
         menuDesenvolvimento.add( menuRanking );
+        menuDesenvolvimento.add( menuPrototipo );
         //String backgroundImageName = "test";
         //backgroundImage = Util.getImageResourceFile(backgroundImageName + ".png", Solitaire.class );
 
@@ -560,6 +564,15 @@ public class Solitaire extends Frame
             	frameRanking = new SolitaireRanking();
             frameRanking.setLocale( Solitaire.this.getLocale() );
             frameRanking.setVisible( true );
+        }
+    }
+    
+    class MenuPListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if( frameMenuP == null )
+            	frameMenuP = new menuprototipo();
+           // frameMenuP.setLocale( Solitaire.this.getLocale() );
+         //   frameMenuP.setVisible( true );
         }
     }
     
@@ -1293,6 +1306,7 @@ public class Solitaire extends Frame
     private Menu                menuOptions;
     private Menu                menuDesenvolvimento;
     private MenuItem            menuRanking;
+    private MenuItem            menuPrototipo;
     private Menu                menuHelp;
     private MenuItem            menuItemNewGame;
     private MenuItem            menuItemRestart;
@@ -1311,6 +1325,7 @@ public class Solitaire extends Frame
 
     private FrameAbout          frameAbout;
     private FrameRules          frameRules;
-    private SolitaireRanking    frameRanking;    
+    private SolitaireRanking    frameRanking; 
+    private menuprototipo       frameMenuP;
 }
 
