@@ -21,11 +21,18 @@ package com.fbergeron.solitaire;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import com.fbergeron.solitaire.Solitaire.NewGameListener;
 import com.fbergeron.solitaire.Solitaire.RestartListener;
 import com.fbergeron.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class FrameCongratulations extends Frame
@@ -72,15 +79,15 @@ public class FrameCongratulations extends Frame
         add(b); 
         add(c);
         add(BorderLayout.CENTER, labelCongratulations);
-
+        
+        String agora = " " + "Tempo: ";
          
         
         long minutos = calculaTempo(t1, t2);
         minutos = minutos / 60;
         long segundos = calculaTempo(t1, t2);
         segundos = segundos % 60;
-        
-        String agora = " " + "Time: ";
+
         
         if (minutos<60) {
         	if(segundos<10) {
@@ -99,7 +106,21 @@ public class FrameCongratulations extends Frame
         agora+="!" + " ";
         String movimentos = "Moves: " + counter + "!";
         
+        ResultadoJogo resultado = new ResultadoJogo(agora, counter);
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(resultado);
+        
         labelCongratulations.setText(Solitaire.resBundle.getString( "YouWon" ) + agora + movimentos);
+        
+        try {
+            String jsonFilePath = "C:\\Users\\ktmig\\Desktop\\MS28S\\resultado.json";
+            Files.write(Paths.get(jsonFilePath), json.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Erro ao gravar o arquivo JSON.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
 
         setTitle( (String)Solitaire.resBundle.getString( "Congratulations" ) );
         addWindowListener( new WindowManager( this, WindowManager.HIDE_ON_CLOSE ) );
@@ -156,6 +177,16 @@ public class FrameCongratulations extends Frame
     java.awt.Label labelCongratulations = new java.awt.Label();
     java.awt.Label labelTempo = new java.awt.Label();
     java.awt.Label labelMovimentos = new java.awt.Label();
+    
+    private class ResultadoJogo {
+        private String tempo;
+        private int movimentos;
+
+        public ResultadoJogo(String tempo, int movimentos) {
+            this.tempo = tempo;
+            this.movimentos = movimentos;
+        }
+    }
 }
 
 
